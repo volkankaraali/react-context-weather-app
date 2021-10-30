@@ -1,0 +1,41 @@
+import { useCity } from '../context/CityContext';
+import rain from '../images/rain.png'
+import cloudy from '../images/cloudy.png'
+import sunny from '../images/sunny.png'
+import snow from '../images/snow.png'
+
+function WeeklyWeather() {
+
+    const { cityData } = useCity();
+
+
+
+
+    return (
+        <>
+            {
+
+                cityData.slice(1).map((day, i) => {
+                    let date = new Date(day.dt * 1000)
+
+                    return (
+                        <div key={i} className="flex flex-row md:flex-col h-14 justify-evenly">
+                            <img className="w-12 h-12 my-auto md:mx-auto"
+                                src={
+                                    (day.weather[0].main === "Clouds") ? cloudy : (day.weather[0].main === "Rain") ? rain : (day.weather[0].main === "Clear") ? sunny :
+                                        (day.weather[0].main === "Snow") ? snow : false
+                                }
+                                alt={day.weather[0].main}
+
+                            />
+                            <h3 className="my-auto text-md sm:text-sm">{date.toLocaleDateString('default', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</h3>
+                            <h3 className="my-auto text-md sm:text-sm">{day.temp.day} C</h3>
+                        </div>
+                    )
+                })
+            }
+        </>
+    )
+}
+
+export default WeeklyWeather
