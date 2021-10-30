@@ -7,7 +7,7 @@ import WeeklyWeather from './WeeklyWeather';
 
 function CurrentWeather() {
 
-    const { cityData } = useCity();
+    const { cityData,cityName } = useCity();
 
     let date= new Date(cityData[0]?.dt*1000)
 
@@ -23,11 +23,12 @@ function CurrentWeather() {
                         />
                     </div>
                     <div className="col-span-2 px-2 text-center md:text-left">
-                        <h3 className="text-base tracking-tighter mt-4 mb-2 font-bold">{date.toLocaleDateString('default',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</h3>
-                        <h4 className="text-sm font-bold">Sıcaklık {cityData[0]?.temp?.day} C</h4>
-                        <h4 className="text-sm font-light">Hissedilen Sıcaklık {cityData[0]?.feels_like?.day} C</h4>
-                        <h4 className="text-sm font-light">En Yüksek {cityData[0]?.temp?.max} C</h4>
-                        <h4 className="text-sm font-light">En Düşük {cityData[0]?.temp?.min} C</h4>
+                        <h4 className="text-sm font-bold mt-4 mb-2">City: {cityName.toLocaleUpperCase()}</h4>
+                        <h3 className="text-base tracking-tighter mb-2 font-bold">{date.toLocaleDateString('default',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</h3>
+                        <h4 className="text-sm font-bold">Temp {cityData[0]?.temp?.day} C</h4>
+                        <h4 className="text-sm font-light">Felt Temp : {cityData[0]?.feels_like?.day} C</h4>
+                        <h4 className="text-sm font-light">Max Temp : {cityData[0]?.temp?.max} C</h4>
+                        <h4 className="text-sm font-light">Min Temp : {cityData[0]?.temp?.min} C</h4>
                     </div>
                 </div>
             </div>
