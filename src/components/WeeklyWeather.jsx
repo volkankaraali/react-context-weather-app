@@ -7,16 +7,16 @@ import fog from '../images/fog.png'
 
 function WeeklyWeather() {
 
-    const { cityData } = useCity();
+    const { cityData,fullcityData } = useCity();
 
 
-
-
+    const sevenDay= fullcityData.daily?.slice(1,8)
+    //console.log(sevenDay);
     return (
         <>
             {
 
-                cityData.slice(1).map((day, i) => {
+                sevenDay.map((day, i) => {
                     let date = new Date(day.dt * 1000)
 
                     return (

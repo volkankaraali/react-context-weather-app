@@ -12,7 +12,7 @@ export const CityProvider = ({children}) =>{
         lon:28.9833
     })
     const [cityData, setCityData] = useState([])
-
+    const [fullcityData, setFullcityData] = useState([])
 
     useEffect(() => {
         let weatherService = new WeatherService()
@@ -32,7 +32,9 @@ export const CityProvider = ({children}) =>{
     useEffect(() => {
         let weatherService = new WeatherService()
         weatherService.getWeeklyWeatherOfCityByLatAndLon(latAndLon.lat,latAndLon.lon)
-        .then(result=> setCityData(result.data.daily))
+        .then(result=> 
+            {setFullcityData(result.data)
+            setCityData(result.data.daily)})
         .catch(err=> console.log(err))
     }, [latAndLon])
     
@@ -40,7 +42,8 @@ export const CityProvider = ({children}) =>{
         cityName,
         setCityName,
         cityData,
-        apiError
+        apiError,
+        fullcityData
     }
 
     return <CityContext.Provider value={values}>{children}</CityContext.Provider>
