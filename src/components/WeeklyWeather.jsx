@@ -3,7 +3,7 @@ import rain from '../images/rain.png'
 import cloudy from '../images/cloudy.png'
 import sunny from '../images/sunny.png'
 import snow from '../images/snow.png'
-import fog from '../images/Fog.png'
+import fog from '../images/fog.png'
 
 function WeeklyWeather() {
 
