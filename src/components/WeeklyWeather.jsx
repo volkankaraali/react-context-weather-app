@@ -16,7 +16,7 @@ function WeeklyWeather() {
         <>
             {
 
-                sevenDay.map((day, i) => {
+                sevenDay?.map((day, i) => {
                     let date = new Date(day.dt * 1000)
 
                     return (
