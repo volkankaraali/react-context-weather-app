@@ -3,6 +3,7 @@ import rain from '../images/rain.png'
 import cloudy from '../images/cloudy.png'
 import sunny from '../images/sunny.png'
 import snow from '../images/snow.png'
+import fog from '../images/Fog.png'
 
 function WeeklyWeather() {
 
@@ -23,7 +24,7 @@ function WeeklyWeather() {
                             <img className="w-12 h-12 my-auto md:mx-auto"
                                 src={
                                     (day.weather[0].main === "Clouds") ? cloudy : (day.weather[0].main === "Rain") ? rain : (day.weather[0].main === "Clear") ? sunny :
-                                        (day.weather[0].main === "Snow") ? snow : false
+                                        (day.weather[0].main === "Snow") ? snow :  (day.weather[0].main === "Fog") ? fog : false
                                 }
                                 alt={day.weather[0].main}
 

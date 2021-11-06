@@ -2,6 +2,7 @@ import rain from '../images/rain.png'
 import cloudy from '../images/cloudy.png'
 import sunny from '../images/sunny.png'
 import snow from '../images/snow.png'
+import fog from '../images/Fog.png'
 import { useCity } from "../context/CityContext"
 import WeeklyWeather from './WeeklyWeather';
 
@@ -24,7 +25,7 @@ function CurrentWeather() {
                         <div className="col-span-1 my-auto">
                             <img className="w-28 h-28 p-2" src={
                                 (cityData[0]?.weather[0]?.main === "Clouds") ? cloudy : (cityData[0]?.weather[0]?.main === "Rain") ? rain : (cityData[0]?.weather[0]?.main === "Clear") ? sunny :
-                                    (cityData[0]?.weather[0]?.main === "Snow") ? snow : false
+                                    (cityData[0]?.weather[0]?.main === "Snow") ? snow : (cityData[0]?.weather[0]?.main === "Fog") ? fog :false
                             } alt=""
                             />
                         </div>
