@@ -3,6 +3,8 @@ import cloudy from '../images/cloudy.png'
 import sunny from '../images/sunny.png'
 import snow from '../images/snow.png'
 import fog from '../images/fog.png'
+import clock from "../images/clock-icon.png"
+
 import { useCity } from "../context/CityContext"
 import WeeklyWeather from './WeeklyWeather';
 
@@ -44,8 +46,9 @@ function CurrentWeather() {
                                     <h4 className="text-sm font-bold">Temp {Math.floor(cityWeatherData[0]?.temp?.day)} °C</h4>
                                     <h4 className="text-sm font-light">Felt Temp : {Math.round(cityWeatherData[0]?.feels_like?.day)} °C</h4>
                                 </div>
-                                <div className='col-span-1 flex self-center'>
-                                    <h4 className='text-sm font-bold mt-4 mb-2'>Clock: {currentTime.toLocaleTimeString(undefined, currentTimeOptions)}</h4>
+                                <div className='col-span-1 flex flex-col self-center items-center'>
+                                    <img className='w-6 h-6' src={clock} alt="clock" />
+                                    <h4 className='text-sm font-bold'> {currentTime.toLocaleTimeString(undefined, currentTimeOptions)}</h4>
                                 </div>
                             </div>
                         </div>
