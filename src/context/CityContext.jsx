@@ -46,7 +46,10 @@ export const CityProvider = ({ children }) => {
                 setCurrentCityWeather(result.data.current)
                 setCityTimeZone(result.data.timezone)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                setApiErrorMes(true)
+            })
     }, [latAndLon])
 
     const values = {

@@ -21,7 +21,6 @@ function CurrentWeather() {
     let currentTime = new Date()
     let currentTimeOptions = { hour: '2-digit', minute: '2-digit', timeZone: `${cityTimeZone}` }
 
-
     return (
         <>
 
