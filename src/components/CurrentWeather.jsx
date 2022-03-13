@@ -31,9 +31,9 @@ function CurrentWeather() {
 
                     <div className="shadow-xl grid grid-cols-1 lg:grid-cols-3 h-full lg:h-48 w-80 sm:w-full container mx-auto ">
                         <div className="bg-yellow-200 sm:rounded-l-lg flex flex-wrap content-center pb-3 md:pb-1">
-                            <div className="grid grid-cols-4 mx-auto">
+                            <div className="grid grid-cols-4 mx-auto px-2">
                                 <div className="col-span-1 my-auto">
-                                    <img className="w-28 h-28 p-2" src={
+                                    <img className="w-20 h-20 p-2" src={
                                         (currentCityWeather?.weather[0]?.main === "Clouds") ? cloudy : (currentCityWeather?.weather[0]?.main === "Rain") ? rain : (currentCityWeather?.weather[0]?.main === "Clear") ? sunny :
                                             (currentCityWeather?.weather[0]?.main === "Snow") ? snow : (currentCityWeather?.weather[0]?.main === "Fog" || currentCityWeather?.weather[0]?.main === "Mist") ? fog : ""
                                     } alt={currentCityWeather?.weather[0]?.main}
