@@ -8,12 +8,16 @@ import WeeklyWeather from './WeeklyWeather';
 
 function CurrentWeather() {
 
-    const { cityWeatherData, cityName, apiError } = useCity();
+    const { cityWeatherData, cityTimeZone, cityName, apiError } = useCity();
 
     //convert epoch/unix time
     let date = new Date(cityWeatherData[0]?.dt * 1000)
-
+    console.log(date.getTimezoneOffset())
     const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }
+
+    //for current time
+    let currentTime = new Date()
+    let currentTimeOptions = { hour: '2-digit', minute: '2-digit', timeZone: `${cityTimeZone}` }
 
     return (
         <>
@@ -25,7 +29,7 @@ function CurrentWeather() {
 
                     <div className="shadow-xl grid grid-cols-1 lg:grid-cols-3 h-full lg:h-48 w-80 sm:w-full container mx-auto ">
                         <div className="bg-yellow-200 sm:rounded-l-lg flex flex-wrap content-center pb-3 md:pb-1">
-                            <div className="grid grid-cols-3 mx-auto">
+                            <div className="grid grid-cols-4 mx-auto">
                                 <div className="col-span-1 my-auto">
                                     <img className="w-28 h-28 p-2" src={
                                         (cityWeatherData[0]?.weather[0]?.main === "Clouds") ? cloudy : (cityWeatherData[0]?.weather[0]?.main === "Rain") ? rain : (cityWeatherData[0]?.weather[0]?.main === "Clear") ? sunny :
@@ -39,6 +43,9 @@ function CurrentWeather() {
                                     <h3 className="text-base tracking-tighter mb-2 font-bold">{date.toLocaleDateString(undefined, dateOptions)}</h3>
                                     <h4 className="text-sm font-bold">Temp {Math.floor(cityWeatherData[0]?.temp?.day)} °C</h4>
                                     <h4 className="text-sm font-light">Felt Temp : {Math.round(cityWeatherData[0]?.feels_like?.day)} °C</h4>
+                                </div>
+                                <div className='col-span-1 flex self-center'>
+                                    <h4 className='text-sm font-bold mt-4 mb-2'>Clock: {currentTime.toLocaleTimeString(undefined, currentTimeOptions)}</h4>
                                 </div>
                             </div>
                         </div>
