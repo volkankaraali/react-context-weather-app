@@ -20,14 +20,11 @@ export const CityProvider = ({ children }) => {
     useEffect(() => {
         let weatherService = new WeatherService()
         weatherService.getCityLatAndLon(cityName).then(result => {
-
             setApiErrorMes(false)
             //gets the first city returned from the request
             let cityLatAndLon = result.data[0]
-            let resLat = Object.entries(cityLatAndLon).find(e => e[0] === "lat")
-            let resLon = Object.entries(cityLatAndLon).find(e => e[0] === "lon")
 
-            setLanAndLon({ lat: resLat[1], lon: resLon[1] })
+            setLanAndLon({ lat: cityLatAndLon?.lat, lon: cityLatAndLon?.lon })
 
         })
             .catch(err => {
