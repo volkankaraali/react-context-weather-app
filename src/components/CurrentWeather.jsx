@@ -10,16 +10,17 @@ import WeeklyWeather from './WeeklyWeather';
 
 function CurrentWeather() {
 
-    const { cityWeatherData, cityTimeZone, cityName, apiError } = useCity();
+    const { cityWeatherData, cityTimeZone, currentCityWeather, cityName, apiError } = useCity();
 
     //convert epoch/unix time
     let date = new Date(cityWeatherData[0]?.dt * 1000)
-    console.log(date.getTimezoneOffset())
+
     const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }
 
     //for current time
     let currentTime = new Date()
     let currentTimeOptions = { hour: '2-digit', minute: '2-digit', timeZone: `${cityTimeZone}` }
+
 
     return (
         <>
@@ -34,17 +35,18 @@ function CurrentWeather() {
                             <div className="grid grid-cols-4 mx-auto">
                                 <div className="col-span-1 my-auto">
                                     <img className="w-28 h-28 p-2" src={
-                                        (cityWeatherData[0]?.weather[0]?.main === "Clouds") ? cloudy : (cityWeatherData[0]?.weather[0]?.main === "Rain") ? rain : (cityWeatherData[0]?.weather[0]?.main === "Clear") ? sunny :
-                                            (cityWeatherData[0]?.weather[0]?.main === "Snow") ? snow : (cityWeatherData[0]?.weather[0]?.main === "Fog" || cityWeatherData[0]?.weather[0]?.main === "Mist") ? fog : ""
-                                    } alt={cityWeatherData[0]?.weather[0]?.main}
+                                        (currentCityWeather?.weather[0]?.main === "Clouds") ? cloudy : (currentCityWeather?.weather[0]?.main === "Rain") ? rain : (currentCityWeather?.weather[0]?.main === "Clear") ? sunny :
+                                            (currentCityWeather?.weather[0]?.main === "Snow") ? snow : (currentCityWeather?.weather[0]?.main === "Fog" || currentCityWeather?.weather[0]?.main === "Mist") ? fog : ""
+                                    } alt={currentCityWeather?.weather[0]?.main}
                                     />
+
                                 </div>
                                 <div className="col-span-2 px-2 text-center md:text-left">
                                     <h4 className="text-sm font-bold mt-4 mb-2">City: {cityName.toLocaleUpperCase()}</h4>
                                     <h3 className="text-base tracking-tighter mb-2 font-bold">{ }</h3>
                                     <h3 className="text-base tracking-tighter mb-2 font-bold">{date.toLocaleDateString(undefined, dateOptions)}</h3>
-                                    <h4 className="text-sm font-bold">Temp {Math.floor(cityWeatherData[0]?.temp?.day)} °C</h4>
-                                    <h4 className="text-sm font-light">Felt Temp : {Math.round(cityWeatherData[0]?.feels_like?.day)} °C</h4>
+                                    <h4 className="text-sm font-bold">Temp {Math.round(currentCityWeather?.temp)} °C</h4>
+                                    <h4 className="text-sm font-light">Felt Temp : {Math.round(currentCityWeather?.feels_like)} °C</h4>
                                 </div>
                                 <div className='col-span-1 flex flex-col self-center items-center'>
                                     <img className='w-6 h-6' src={clock} alt="clock" />

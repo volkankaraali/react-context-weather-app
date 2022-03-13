@@ -13,9 +13,12 @@ export const CityProvider = ({ children }) => {
         lon: 28.9833
     })
 
+    //city current weather data
+    const [currentCityWeather, setCurrentCityWeather] = useState()
     //8 days weather date(first item current date)
     const [cityWeatherData, setCityDailyWeatherData] = useState([])
     const [cityTimeZone, setCityTimeZone] = useState("Europe/Istanbul")
+
 
     useEffect(() => {
         let weatherService = new WeatherService()
@@ -38,7 +41,9 @@ export const CityProvider = ({ children }) => {
         let weatherService = new WeatherService()
         weatherService.getWeeklyWeatherOfCityByLatAndLon(latAndLon.lat, latAndLon.lon)
             .then(result => {
+                //console.log(typeof result.data.current)
                 setCityDailyWeatherData(result.data.daily)
+                setCurrentCityWeather(result.data.current)
                 setCityTimeZone(result.data.timezone)
             })
             .catch(err => console.log(err))
@@ -49,7 +54,8 @@ export const CityProvider = ({ children }) => {
         setCityName,
         cityWeatherData,
         apiError,
-        cityTimeZone
+        cityTimeZone,
+        currentCityWeather
     }
 
     return <CityContext.Provider value={values}>{children}</CityContext.Provider>
