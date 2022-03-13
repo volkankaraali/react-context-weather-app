@@ -15,7 +15,7 @@ export const CityProvider = ({ children }) => {
 
     //8 days weather date(first item current date)
     const [cityWeatherData, setCityDailyWeatherData] = useState([])
-    const [cityTimeZone, setCityTimeZone] = useState("")
+    const [cityTimeZone, setCityTimeZone] = useState("Europe/Istanbul")
 
     useEffect(() => {
         let weatherService = new WeatherService()
