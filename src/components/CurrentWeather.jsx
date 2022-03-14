@@ -5,7 +5,6 @@ import snow from '../images/snow.png'
 import fog from '../images/fog.png'
 import clock from "../images/clock-icon.png"
 
-import { useState, useEffect } from "react";
 import { useCity } from "../context/CityContext"
 import WeeklyWeather from './WeeklyWeather';
 import Clock from './Clock'
@@ -19,15 +18,7 @@ function CurrentWeather() {
 
     //convert epoch/unix time
     let date = new Date(cityWeatherData[0]?.dt * 1000)
-
     const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }
-
-    //for current time
-    //let currentTime = new Date()
-    //console.log(cityTimeZone)
-
-
-
 
 
     return (
