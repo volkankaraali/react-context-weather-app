@@ -5,12 +5,17 @@ import snow from '../images/snow.png'
 import fog from '../images/fog.png'
 import clock from "../images/clock-icon.png"
 
+import { useState, useEffect } from "react";
 import { useCity } from "../context/CityContext"
 import WeeklyWeather from './WeeklyWeather';
+import Clock from './Clock'
+
 
 function CurrentWeather() {
 
-    const { cityWeatherData, cityTimeZone, currentCityWeather, cityName, apiError } = useCity();
+    const { cityWeatherData, currentCityWeather, cityName, apiError } = useCity();
+
+
 
     //convert epoch/unix time
     let date = new Date(cityWeatherData[0]?.dt * 1000)
@@ -18,8 +23,12 @@ function CurrentWeather() {
     const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }
 
     //for current time
-    let currentTime = new Date()
-    let currentTimeOptions = { hour: '2-digit', minute: '2-digit', timeZone: `${cityTimeZone}` }
+    //let currentTime = new Date()
+    //console.log(cityTimeZone)
+
+
+
+
 
     return (
         <>
@@ -49,7 +58,7 @@ function CurrentWeather() {
                                 </div>
                                 <div className='col-span-1 flex flex-col self-center items-center'>
                                     <img className='w-6 h-6' src={clock} alt="clock" />
-                                    <h4 className='text-sm font-bold'> {currentTime.toLocaleTimeString(undefined, currentTimeOptions)}</h4>
+                                    <h4 className='text-xs font-bold'> {<Clock />}</h4>
                                 </div>
                             </div>
                         </div>
