@@ -7,6 +7,7 @@ const CityContext = createContext();
 export const CityProvider = ({ children }) => {
 
     const [cityName, setCityName] = useState("istanbul")
+    const [cityCountry, setCityCountry] = useState("TR")
     const [apiError, setApiErrorMes] = useState(false)
     const [latAndLon, setLanAndLon] = useState({
         lat: 41.0351,
@@ -25,9 +26,9 @@ export const CityProvider = ({ children }) => {
         weatherService.getCityLatAndLon(cityName).then(result => {
             setApiErrorMes(false)
             //gets the first city returned from the request
-            let cityLatAndLon = result.data[0]
-
-            setLanAndLon({ lat: cityLatAndLon?.lat, lon: cityLatAndLon?.lon })
+            let city = result.data[0]
+            setCityCountry(city.country)
+            setLanAndLon({ lat: city?.lat, lon: city?.lon })
 
         })
             .catch(err => {
@@ -58,7 +59,8 @@ export const CityProvider = ({ children }) => {
         cityWeatherData,
         apiError,
         cityTimeZone,
-        currentCityWeather
+        currentCityWeather,
+        cityCountry
     }
 
     return <CityContext.Provider value={values}>{children}</CityContext.Provider>

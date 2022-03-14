@@ -8,11 +8,12 @@ import clock from "../images/clock-icon.png"
 import { useCity } from "../context/CityContext"
 import WeeklyWeather from './WeeklyWeather';
 import Clock from './Clock'
+import ReactCountryFlag from 'react-country-flag'
 
 
 function CurrentWeather() {
 
-    const { cityWeatherData, currentCityWeather, cityName, apiError } = useCity();
+    const { cityWeatherData, cityCountry, currentCityWeather, cityName, apiError } = useCity();
 
 
 
@@ -30,8 +31,8 @@ function CurrentWeather() {
                     :
 
                     <div className="shadow-xl grid grid-cols-1 lg:grid-cols-3 h-full lg:h-48 w-80 sm:w-full container mx-auto ">
-                        <div className="bg-yellow-200 sm:rounded-l-lg flex flex-wrap content-center pb-3 md:pb-1">
-                            <div className="grid grid-cols-4 mx-auto px-2">
+                        <div className="bg-yellow-200 sm:rounded-l-lg flex flex-wrap content-center py-3 md:pb-1">
+                            <div className="grid grid-cols-4 mx-auto px-2 ">
                                 <div className="col-span-1 my-auto">
                                     <img className="w-20 h-20 p-2" src={
                                         (currentCityWeather?.weather[0]?.main === "Clouds") ? cloudy : (currentCityWeather?.weather[0]?.main === "Rain") ? rain : (currentCityWeather?.weather[0]?.main === "Clear") ? sunny :
@@ -41,8 +42,10 @@ function CurrentWeather() {
 
                                 </div>
                                 <div className="col-span-2 px-2 text-center md:text-left">
-                                    <h4 className="text-sm font-bold mt-4 mb-2">City: {cityName.toLocaleUpperCase()}</h4>
-                                    <h3 className="text-base tracking-tighter mb-2 font-bold">{ }</h3>
+                                    <div className='flex items-center mb-2'>
+                                        <h4 className="text-sm font-bold ">City: {cityName.toLocaleUpperCase()}</h4>
+                                        <ReactCountryFlag style={{ width: '20px', height: '20px', marginLeft: "5px" }} countryCode={`${cityCountry}`} svg />
+                                    </div>
                                     <h3 className="text-base tracking-tighter mb-2 font-bold">{date.toLocaleDateString(undefined, dateOptions)}</h3>
                                     <h4 className="text-sm font-bold">Temp {Math.round(currentCityWeather?.temp)} °C</h4>
                                     <h4 className="text-sm font-light">Felt Temp : {Math.round(currentCityWeather?.feels_like)} °C</h4>
